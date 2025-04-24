@@ -1,4 +1,4 @@
-package org.example.library.Main;
+package Main;
 
 import Model.Book;
 import Model.Document;
