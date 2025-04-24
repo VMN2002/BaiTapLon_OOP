@@ -22,12 +22,12 @@ public class Library {
     }
 
     public void removeDocument(String docId) {
-        documents.removeIf(doc -> doc.getId().equals(docId));
+        documents.removeIf(doc -> doc.getDocId().equals(docId));
     }
 
     public Document findDocumentById(String docId) {
         for (Document doc : documents) {
-            if (doc.getId().equals(docId)) {
+            if (doc.getDocId().equals(docId)) {
                 return doc;
             }
         }
@@ -62,7 +62,6 @@ public class Library {
         User user = findUserById(userId);
         Document doc = findDocumentById(docId);
         if (user != null && doc != null) {
-            // Kiểm tra điều kiện mượn, số lượng tài liệu, ... nếu cần
             user.borrowDocument(doc);
             return true;
         }
@@ -81,7 +80,7 @@ public class Library {
 
     public void displayAllDocuments() {
         for (Document doc : documents) {
-            doc.printInfo();
+            doc.displayInfo();
             System.out.println("----------------------------");
         }
     }

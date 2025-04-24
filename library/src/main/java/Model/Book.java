@@ -1,37 +1,24 @@
 package Model;
 
 public class Book extends Document {
-    private String publisher;
-    private int publicationYear;
+    private String genre;
 
-    public Book(String id, String title, String author, String publisher, int publicationYear) {
-        super(id, title, author);
-        this.publisher = publisher;
-        this.publicationYear = publicationYear;
+    public Book(String docId, String title, String author, String publisher, int publicationYear, String genre) {
+        super(docId, title, author, publisher, publicationYear);
+        this.genre = genre;
     }
 
-    public String getPublisher() {
-        return publisher;
+    public String getGenre() {
+        return genre;
     }
 
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
-    }
-
-    public int getPublicationYear() {
-        return publicationYear;
-    }
-
-    public void setPublicationYear(int publicationYear) {
-        this.publicationYear = publicationYear;
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 
     @Override
-    public void printInfo() {
-        System.out.println("Book ID: " + getId());
-        System.out.println("Title: " + getTitle());
-        System.out.println("Author: " + getAuthor());
-        System.out.println("Publisher: " + publisher);
-        System.out.println("Year: " + publicationYear);
+    public void displayInfo() {
+        System.out.println("Book - ID: " + docId + ", Title: " + title + ", Author: " + author +
+                ", Publisher: " + publisher + ", Year: " + publicationYear + ", Genre: " + genre);
     }
 }
