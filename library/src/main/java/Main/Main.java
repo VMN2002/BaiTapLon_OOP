@@ -28,6 +28,7 @@ public class Main {
             System.out.println("[7] Borrow Document");
             System.out.println("[8] Return Document");
             System.out.println("[9] Display User Information");
+            System.out.println("[10] Search Books on Google Books API");
             System.out.print("Select an option: ");
 
             String choice = scanner.nextLine();
@@ -118,6 +119,29 @@ public class Main {
                         user.printUserInfo();
                     } else {
                         System.out.println("User not found.");
+                    }
+                    break;
+                case "10":
+                    System.out.print("Nhập từ khóa tìm kiếm: ");
+                    String name = scanner.nextLine();
+                    List<Book> books = Util.GoogleBooksApi.searchBooks(name);
+                    if (books.isEmpty()) {
+                        System.out.println("Không tìm thấy sách nào.");
+                    } else {
+                        for (int i = 0; i < books.size(); i++) {
+                            System.out.print((i + 1) + ". ");
+                            books.get(i).displayInfo();
+                        }
+                        System.out.print("Chọn số sách muốn thêm (0 để hủy): ");
+                        int choice1 = Integer.parseInt(scanner.nextLine());
+                        if (choice1 > 0 && choice1 <= books.size()) {
+                            Book b = books.get(choice1 - 1);
+                            b.setDocId(java.util.UUID.randomUUID().toString());
+                            library.addDocument(b);
+                            System.out.println("Đã thêm sách vào thư viện.");
+                        } else {
+                            System.out.println("Hủy thêm sách.");
+                        }
                     }
                     break;
                 default:
