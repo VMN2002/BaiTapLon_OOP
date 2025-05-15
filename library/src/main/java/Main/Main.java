@@ -14,10 +14,6 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         boolean exit = false;
 
-//        library.addDocument(new Book( "Clean Code", "Robert C. Martin", "Prentice Hall", 2008, "Khoa hoc"));
-//        library.addDocument(new Book("Effective Java", "Joshua Bloch", "Addison-Wesley", 2018, "Khoa hoc"));
-//        library.addUser(new User("U100", "John Doe", "U001@gmail.com"));
-
         System.out.println("Welcome to My Application");
 
         while (!exit) {
