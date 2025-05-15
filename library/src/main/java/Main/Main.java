@@ -8,18 +8,15 @@ import Service.Library;
 import java.util.List;
 import java.util.Scanner;
 
-import java.util.List;
-import java.util.Scanner;
-
 public class Main {
     public static void main(String[] args) {
         Library library = new Library();
         Scanner scanner = new Scanner(System.in);
         boolean exit = false;
 
-        library.addDocument(new Book("B001", "Clean Code", "Robert C. Martin", "Prentice Hall", 2008, "Khoa hoc"));
-        library.addDocument(new Book("B002", "Effective Java", "Joshua Bloch", "Addison-Wesley", 2018, "Khoa hoc"));
-        library.addUser(new User("U001", "John Doe", "U001@gmail.com"));
+//        library.addDocument(new Book( "Clean Code", "Robert C. Martin", "Prentice Hall", 2008, "Khoa hoc"));
+//        library.addDocument(new Book("Effective Java", "Joshua Bloch", "Addison-Wesley", 2018, "Khoa hoc"));
+//        library.addUser(new User("U100", "John Doe", "U001@gmail.com"));
 
         System.out.println("Welcome to My Application");
 
@@ -56,7 +53,7 @@ public class Main {
                     System.out.print("Enter genre");
                     String genre = scanner.nextLine();
 
-                    Document newBook = new Book(id, title, author, publisher, year, genre);
+                    Document newBook = new Book(title, author, publisher, year, genre);
                     library.addDocument(newBook);
                     System.out.println("Document added successfully.");
                     break;

@@ -7,8 +7,8 @@ public abstract class Document {
     protected String publisher;
     protected int publicationYear;
 
-    public Document(String docId, String title, String author, String publisher, int publicationYear) {
-        this.docId = docId;
+    public Document(String title, String author, String publisher, int publicationYear) {
+        this.docId = "0";
         this.title = title;
         this.author = author;
         this.publisher = publisher;

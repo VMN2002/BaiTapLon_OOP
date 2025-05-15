@@ -1,42 +1,54 @@
 package Service;
 
-
-
+import DAO.BorrowingDAO;
+import DAO.DocumentDAO;
+import DAO.UserDAO;
 import Model.Document;
 import Model.User;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Library {
-    private List<Document> documents;
-    private List<User> users;
+    private DocumentDAO documentDAO;
+    private UserDAO userDAO;
+    private BorrowingDAO borrowingDAO;
 
     public Library() {
-        this.documents = new ArrayList<>();
-        this.users = new ArrayList<>();
+        this.documentDAO = new DocumentDAO();
+        this.userDAO = new UserDAO();
+        this.borrowingDAO = new BorrowingDAO();
     }
 
-    public void addDocument(Document doc) {
-        documents.add(doc);
+    public boolean addDocument(Document doc) {
+        return documentDAO.addDocument(doc);
+    }
+
+    public boolean addUser(User user) {
+        return userDAO.addUser(user);
+    }
+
+    public int getDocumentCount() throws SQLException {
+        return documentDAO.getDocumentCount();
+    }
+
+    public int getUserCount() throws SQLException {
+        return userDAO.getUserCount();
     }
 
     public void removeDocument(String docId) {
-        documents.removeIf(doc -> doc.getDocId().equals(docId));
+        documentDAO.deleteDocument(docId);
     }
 
     public Document findDocumentById(String docId) {
-        for (Document doc : documents) {
-            if (doc.getDocId().equals(docId)) {
-                return doc;
-            }
-        }
-        return null;
+        return documentDAO.getDocumentById(docId);
     }
 
     public List<Document> searchDocuments(String keyword) {
+        List<Document> allDocuments = documentDAO.getAllDocuments();
         List<Document> result = new ArrayList<>();
-        for (Document doc : documents) {
+        for (Document doc : allDocuments) {
             if (doc.getTitle().toLowerCase().contains(keyword.toLowerCase()) ||
                     doc.getAuthor().toLowerCase().contains(keyword.toLowerCase())) {
                 result.add(doc);
@@ -45,41 +57,21 @@ public class Library {
         return result;
     }
 
-    public void addUser(User user) {
-        users.add(user);
-    }
-
     public User findUserById(String userId) {
-        for (User user : users) {
-            if (user.getUserId().equals(userId)) {
-                return user;
-            }
-        }
-        return null;
+        return userDAO.getUserById(userId);
     }
 
     public boolean borrowDocument(String userId, String docId) {
-        User user = findUserById(userId);
-        Document doc = findDocumentById(docId);
-        if (user != null && doc != null) {
-            user.borrowDocument(doc);
-            return true;
-        }
-        return false;
+        return borrowingDAO.addBorrowing(userId, docId);
     }
 
     public boolean returnDocument(String userId, String docId) {
-        User user = findUserById(userId);
-        Document doc = findDocumentById(docId);
-        if (user != null && doc != null) {
-            user.returnDocument(doc);
-            return true;
-        }
-        return false;
+        return borrowingDAO.returnDocumentByUserAndDoc(userId, docId);
     }
 
     public void displayAllDocuments() {
-        for (Document doc : documents) {
+        List<Document> docs = documentDAO.getAllDocuments();
+        for (Document doc : docs) {
             doc.displayInfo();
             System.out.println("----------------------------");
         }

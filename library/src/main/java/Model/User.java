@@ -17,22 +17,6 @@ public class User {
         this.borrowedDocuments = new ArrayList<>();
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setBorrowedDocuments(List<Document> borrowedDocuments) {
-        this.borrowedDocuments = borrowedDocuments;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -43,6 +27,18 @@ public class User {
 
     public String getUserId() {
         return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<Document> getBorrowedDocuments() {
@@ -60,6 +56,7 @@ public class User {
     public void printUserInfo() {
         System.out.println("User ID: " + userId);
         System.out.println("Name: " + name);
+        System.out.println("Email: " + email);
         System.out.println("Borrowed Documents: ");
         for (Document doc : borrowedDocuments) {
             System.out.println("  - " + doc.getTitle());
