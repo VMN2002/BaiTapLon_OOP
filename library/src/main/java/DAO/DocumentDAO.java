@@ -28,6 +28,7 @@ public class DocumentDAO {
                 switch (type) {
                     case "Book":
                         doc = new Book(
+                                rs.getInt("doc_id"),
                                 rs.getString("title"),
                                 rs.getString("author"),
                                 rs.getString("publisher"),
@@ -37,6 +38,7 @@ public class DocumentDAO {
                         break;
                     case "Magazine":
                         doc = new Magazine(
+                                rs.getInt("doc_id"),
                                 rs.getString("title"),
                                 rs.getString("author"),
                                 rs.getString("publisher"),
@@ -46,6 +48,7 @@ public class DocumentDAO {
                         break;
                     case "Thesis":
                         doc = new Thesis(
+                                rs.getInt("doc_id"),
                                 rs.getString("title"),
                                 rs.getString("author"),
                                 rs.getString("publisher"),
@@ -104,9 +107,8 @@ public class DocumentDAO {
             if (rowsAffected > 0) {
                 ResultSet rs = pstmt.getGeneratedKeys();
                 if (rs.next()) {
-                    int generatedId = rs.getInt(1);
-                    String formattedId = String.format("B%03d", generatedId);
-                    doc.setDocId(formattedId);
+                    int id = countDocuments() + 1;
+                    doc.setDocId(id);
                 }
                 return true;
             }
@@ -158,6 +160,7 @@ public class DocumentDAO {
                     switch (type) {
                         case "Book":
                             doc = new Book(
+                                    rs.getInt("doc_id"),
                                     rs.getString("title"),
                                     rs.getString("author"),
                                     rs.getString("publisher"),
@@ -167,6 +170,7 @@ public class DocumentDAO {
                             break;
                         case "Magazine":
                             doc = new Magazine(
+                                    rs.getInt("doc_id"),
                                     rs.getString("title"),
                                     rs.getString("author"),
                                     rs.getString("publisher"),
@@ -176,6 +180,7 @@ public class DocumentDAO {
                             break;
                         case "Thesis":
                             doc = new Thesis(
+                                    rs.getInt("doc_id"),
                                     rs.getString("title"),
                                     rs.getString("author"),
                                     rs.getString("publisher"),
@@ -194,5 +199,17 @@ public class DocumentDAO {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public int countDocuments() throws SQLException {
+        String sql = "SELECT COUNT(*) FROM documents";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        }
+        return 0;
     }
 }

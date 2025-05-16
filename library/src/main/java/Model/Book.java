@@ -3,8 +3,8 @@ package Model;
 public class Book extends Document {
     private String genre;
 
-    public Book(String title, String author, String publisher, int publicationYear, String genre) {
-        super(title, author, publisher, publicationYear);
+    public Book(int docId, String title, String author, String publisher, int publicationYear, String genre) {
+        super(docId, title, author, publisher, publicationYear);
         this.genre = genre;
     }
 

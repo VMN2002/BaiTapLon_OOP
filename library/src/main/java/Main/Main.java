@@ -41,7 +41,7 @@ public class Main {
                     break;
                 case "1":
                     System.out.print("Enter Document ID: ");
-                    String id = scanner.nextLine();
+                    int id = scanner.nextInt();
                     System.out.print("Enter Title: ");
                     String title = scanner.nextLine();
                     System.out.print("Enter Author: ");
@@ -50,10 +50,10 @@ public class Main {
                     String publisher = scanner.nextLine();
                     System.out.print("Enter Publication Year: ");
                     int year = Integer.parseInt(scanner.nextLine());
-                    System.out.print("Enter genre");
+                    System.out.print("Enter genre: ");
                     String genre = scanner.nextLine();
 
-                    Document newBook = new Book(title, author, publisher, year, genre);
+                    Document newBook = new Book(id, title, author, publisher, year, genre);
                     library.addDocument(newBook);
                     System.out.println("Document added successfully.");
                     break;

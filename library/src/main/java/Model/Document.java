@@ -1,21 +1,21 @@
 package Model;
 
 public abstract class Document {
-    protected String docId;
+    protected int docId;
     protected String title;
     protected String author;
     protected String publisher;
     protected int publicationYear;
 
-    public Document(String title, String author, String publisher, int publicationYear) {
-        this.docId = "0";
+    public Document(int docId, String title, String author, String publisher, int publicationYear) {
+        this.docId = docId;
         this.title = title;
         this.author = author;
         this.publisher = publisher;
         this.publicationYear = publicationYear;
     }
 
-    public String getDocId() {
+    public int getDocId() {
         return docId;
     }
 
@@ -35,7 +35,7 @@ public abstract class Document {
         return publicationYear;
     }
 
-    public void setDocId(String docId) {
+    public void setDocId(int docId) {
         this.docId = docId;
     }
 

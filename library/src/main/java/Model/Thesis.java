@@ -3,8 +3,8 @@ package Model;
 public class Thesis extends Document {
     private String university;
 
-    public Thesis(String title, String author, String publisher, int publicationYear, String university) {
-        super(title, author, publisher, publicationYear);
+    public Thesis(int docId, String title, String author, String publisher, int publicationYear, String university) {
+        super(docId, title, author, publisher, publicationYear);
         this.university = university;
     }
 
